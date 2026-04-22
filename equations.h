@@ -1,13 +1,16 @@
 #ifndef EQUATIONS_H
 #define EQUATIONS_H
 
+#include "populations.h"
+
 class equations {
-    private:
+private:
     double beta;
     double sigma;
     double gamma;
 public:
-    double normalise(double upper, double N);
+    equations();
+
     double ds_dt(double beta, double i, double s);
     double de_dt(double beta, double sigma, double i, double s, double e);
     double di_dt(double sigma, double gamma, double e, double i);

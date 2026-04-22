@@ -1,11 +1,9 @@
 #include "equations.h"
+#include "populations.h"
 
 equations::equations(){}
 
-double equations::normalise(double upper, double N){
-    return upper / N;
-}
-
+// The coupled set of equations (7 - 10)
 double equations::ds_dt(double beta, double i, double s){
     return -beta * i * s;
 }

@@ -7,7 +7,9 @@ public:
     int e;
     int i;
     int r;
-    int N;
+
+    populations();
+    bool isValid(double tolerance  = 1e-3);
 };
 
 #endif
