@@ -3,10 +3,10 @@
 
 class populations {
 public:
-    int S;
-    int E;
-    int I;
-    int R;
+    int s;
+    int e;
+    int i;
+    int r;
     int N;
 };
 

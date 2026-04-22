@@ -1,6 +1,5 @@
 #include "populations.h"
 
-
 populations::populations()
-    : S(S), E(E), I(I), R(R), N(N){}
+    : s(N), e(0), i(0), r(0), N(N){}
 
