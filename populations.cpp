@@ -1,11 +1,11 @@
 #include "populations.h"
 
-populations::populations(){
+Populations::Populations(){
 
 };
 
 // Ensures the fractional populations sum to 1
-bool populations::isValid(double tolerance){
+bool Populations::isValid(double tolerance){
     if(s + e + i + r > 1 + tolerance){
         return false;
     }
