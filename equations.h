@@ -11,10 +11,10 @@ private:
 
 public:
     Equations();
-    double ds_dt(double i, double s);
-    double de_dt(double i, double s, double e);
-    double di_dt(double e, double i);
-    double dr_dt(double i);
+    double ds_dt(double i, double s) const;
+    double de_dt(double i, double s, double e) const;
+    double di_dt(double e, double i) const;
+    double dr_dt(double i) const;
 };
 
 #endif
