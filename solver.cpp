@@ -14,9 +14,10 @@ Solution Solver::solveRK4(const Equations& eqs, const Populations& initial){
     solution.states.push_back(current_pop);
 
     while(t < t_end){
-        double k1_s = eqs.ds_dt(eqs.beta, current_pop.i, current_pop.s)
+        double k1_s = eqs.ds_dt(eqs.beta, current_pop.i, current_pop.s);
+        double k1_e = eqs.de_dt()
 
-    
+
         t += dt;
     }
 

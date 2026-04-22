@@ -4,16 +4,17 @@
 #include "populations.h"
 
 class Equations {
-public:
+private:
     double beta;
     double sigma;
     double gamma;
 
+public:
     Equations();
-    double ds_dt(double beta, double i, double s);
-    double de_dt(double beta, double sigma, double i, double s, double e);
-    double di_dt(double sigma, double gamma, double e, double i);
-    double dr_dt(double gamma, double i);
+    double ds_dt(double i, double s);
+    double de_dt(double i, double s, double e);
+    double di_dt(double e, double i);
+    double dr_dt(double i);
 };
 
 #endif
