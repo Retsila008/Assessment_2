@@ -8,7 +8,8 @@ public:
     double i;
     double r;
 
-    Populations(double s = 0.99, double e = 0.0, double i = 0.01, double r = 0.0);
+    // Hardcode intial population statistics
+    Populations(double s = 0.99, double e = 0.01, double i = 0, double r = 0);
     bool isValid(double tolerance  = 1e-3);
 };
 

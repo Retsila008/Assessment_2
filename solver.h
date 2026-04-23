@@ -14,9 +14,9 @@ class Solver {
 private: 
     double dt;
     double t_end;
-    
+
 public:
-    Solver(double dt = 0.1, double t_end = 100.0);
+    Solver(double dt, double t_end);
     Solution solveRK4(const Equations& eqs, const Populations& initial);
 };
 

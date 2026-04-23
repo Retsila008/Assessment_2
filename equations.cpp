@@ -1,7 +1,8 @@
 #include "equations.h"
 #include "populations.h"
 
-Equations::Equations(){}
+Equations::Equations(double beta, double sigma, double gamma)
+    : beta(beta), sigma(sigma), gamma(gamma){}
 
 // The coupled set of equations (7 - 10)
 double Equations::ds_dt(double i, double s) const{

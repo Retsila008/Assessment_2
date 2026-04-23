@@ -10,7 +10,7 @@ private:
     double gamma;
 
 public:
-    Equations();
+    Equations(double beta, double sigma, double gamma);
     double ds_dt(double i, double s) const;
     double de_dt(double i, double s, double e) const;
     double di_dt(double e, double i) const;

@@ -1,6 +1,6 @@
-# include "solver.h"
 #include <cmath>
 #include <iostream>
+# include "solver.h"
 
 // Initialise the class
 Solver::Solver(double dt, double t_end)
