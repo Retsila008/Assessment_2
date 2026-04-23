@@ -3,12 +3,12 @@
 
 class Populations {
 public:
-    int s;
-    int e;
-    int i;
-    int r;
+    double s;
+    double e;
+    double i;
+    double r;
 
-    Populations();
+    Populations(double s = 0.99, double e = 0.0, double i = 0.01, double r = 0.0);
     bool isValid(double tolerance  = 1e-3);
 };
 

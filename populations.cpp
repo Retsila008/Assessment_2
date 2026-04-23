@@ -1,8 +1,7 @@
 #include "populations.h"
 
-Populations::Populations(){
-
-};
+Populations::Populations(double s, double e, double i, double r)
+    : s(s), e(e), i(e), r(r){};
 
 // Ensures the fractional populations sum to 1
 bool Populations::isValid(double tolerance){
