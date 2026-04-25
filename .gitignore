@@ -6,3 +6,6 @@
 # Data and run files
 main
 task_1_data
+
+# Figures
+*.png

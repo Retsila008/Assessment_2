@@ -46,6 +46,5 @@ void writeCSV(const std::string& filename, const Solution& solution) {
              << solution.states[i].i << ","
              << solution.states[i].r << "\n";
     }
-    
     file.close();
 }
