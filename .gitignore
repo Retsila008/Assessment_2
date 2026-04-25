@@ -2,3 +2,7 @@
 *.exe
 *.out
 *.app
+
+# Data and run files
+main
+task_1_data

@@ -1,7 +1,10 @@
 #include <iostream>
+#include <fstream>
 #include "equations.h"
 #include "populations.h"
 #include "solver.h"
+
+void writeCSV(const std::string& filename, const Solution& solution);
 
 int main(){
     double beta;
@@ -23,5 +26,26 @@ int main(){
 
     // Run the solver function to solve the coupled differential equations
     Solution solution = solver.solveRK4(eqs, initial);
+
+    // Run the writeCSV function to add data to file
+    writeCSV("task_1_data", solution);
+};
+
+// Function for adding data to file
+void writeCSV(const std::string& filename, const Solution& solution) {
+    std::ofstream file(filename);
     
+    // Write header
+    file << "time,s,e,i,r\n";
+    
+    // Write data
+    for (size_t i = 0; i < solution.times.size(); ++i) {
+        file << solution.times[i] << ","
+             << solution.states[i].s << ","
+             << solution.states[i].e << ","
+             << solution.states[i].i << ","
+             << solution.states[i].r << "\n";
+    }
+    
+    file.close();
 }
