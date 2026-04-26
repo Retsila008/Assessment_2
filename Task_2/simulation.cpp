@@ -3,6 +3,9 @@
 #include <iostream>
 #include <random>
 #include <cmath>
+#include <fstream>
+#include <sstream>
+#include <cstdlib>
 
 Simulation::Simulation(Initial& initial, int num_steps, double beta, double sigma, double gamma)
     : initial(initial), num_steps(num_steps), beta(beta), sigma(sigma), gamma(gamma){}
@@ -11,6 +14,8 @@ void Simulation::run(){
     // Go through time and run the simulation for each step
     for(int i = 0; i < num_steps; ++i){
         step();
+        // Save snapshot of matrix 
+        saveMatrix(i);
     }
 }
 
@@ -25,6 +30,34 @@ void Simulation::step(){
             }
         }
     }
+}
+
+void Simulation::saveMatrix(int step_number){
+    // Make folder for outputs to keep it neat
+    system("mkdir -p matrix_outputs");
+
+    // Name file
+    std::stringstream filename;
+    filename << "matrix_outputs/step_" << step_number << ".txt";
+
+    std::ofstream file(filename.str());
+    int env_size = initial.getEnvSize();
+    
+    for(int x = 0; x < env_size; x++){
+        for(int y = 0; y < env_size; y++){
+            if(initial.matrix[x][y] != nullptr){
+                file << initial.matrix[x][y] -> compartment;
+            }
+            else{
+                file << 0;
+            }
+            if(y < env_size - 1){
+                file << " ";
+            }
+        }
+    file << "\n";
+    }
+    file.close();
 }
 
 void Simulation::updateAgent(int x, int y){
@@ -143,7 +176,8 @@ void Simulation::updateAgent(int x, int y){
                 }
             }
         }
-
+        
+        // If the conditions are met, infect the agent
         if(becoming_infected = true){
             agent -> compartment = 2;
         }

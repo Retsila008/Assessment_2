@@ -16,6 +16,7 @@ public:
     void run();
     void step();
     void updateAgent(int x, int y);
+    void saveMatrix(int step_number);
 };
 
 #endif
