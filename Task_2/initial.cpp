@@ -3,8 +3,8 @@
 #include <set>
 #include <cmath>
 
-Initial::Initial(int env_size, int num_agents, double inf_ratio)
-    : env_size(env_size), num_agents(num_agents), inf_ratio(inf_ratio){}
+Initial::Initial(int env_size, int num_agents, double exposed_ratio)
+    : env_size(env_size), num_agents(num_agents), exposed_ratio(exposed_ratio){}
 
 void Initial::generateMatrix(){
     matrix.assign(env_size, std::vector<Populations*>(env_size, nullptr));
@@ -18,7 +18,7 @@ void Initial::placeAgents(){
 
     // Calculate the required number of infected agents
     std::set<std::pair<int, int>> occupied;
-    int infected_count = static_cast<int>(std::round(num_agents * inf_ratio));
+    int exposed_count = static_cast<int>(std::round(num_agents * exposed_ratio));
     int agent_count = 0;
 
     // Randomise agent locations
@@ -29,11 +29,15 @@ void Initial::placeAgents(){
         // If the desired location is empty
         if (occupied.find({x, y}) == occupied.end()) {
             // Determine agents compartment
-            int compartment = (agent_count < infected_count) ? 2 : 0;
+            int compartment = (agent_count < exposed_count) ? 3 : 1;
             std::vector<int> coords  = {x, y};
             matrix[x][y] = new Populations(coords, compartment);
             occupied.insert({x, y});
             agent_count++;
         }
     }
+}
+
+int Initial::getEnvSize(){
+    return env_size;
 }
