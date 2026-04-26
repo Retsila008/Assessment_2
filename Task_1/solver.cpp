@@ -51,10 +51,13 @@ Solution Solver::solveRK4(const Equations& eqs, const Populations& initial){
         solution.times.push_back(t);
         solution.states.push_back(current_pop);
 
+        // Check the population total is around 1
         if(!current_pop.isValid()){
             std::cerr << "Error: population invalid at t = " << t << std::endl;
             break;
         }
+
+        
     };
 
     return solution;

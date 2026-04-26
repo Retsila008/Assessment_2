@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # Immport data file
-df = pd.read_csv("task_1_data")
+df = pd.read_csv("Task_1/task_1_data")
 
 # Create plot
 plt.figure(figsize = (12,8))
