@@ -12,3 +12,7 @@ task_1_data
 
 # Word Doc
 *.docx
+
+# Output files
+*.txt
+*.gif
