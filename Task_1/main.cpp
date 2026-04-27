@@ -1,3 +1,4 @@
+// Import libraries
 #include <iostream>
 #include <fstream>
 #include "equations.h"
@@ -7,6 +8,7 @@
 void writeCSV(const std::string& filename, const Solution& solution);
 
 int main(){
+    // Initilaise variables for transition probabilities
     double beta;
     double sigma;
     double gamma;
@@ -46,5 +48,6 @@ void writeCSV(const std::string& filename, const Solution& solution) {
              << solution.states[i].i << ","
              << solution.states[i].r << "\n";
     }
+    // Close file
     file.close();
 }

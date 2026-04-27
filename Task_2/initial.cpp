@@ -3,13 +3,16 @@
 #include <set>
 #include <cmath>
 
+// Constructor for the class
 Initial::Initial(int env_size, int num_agents, double exposed_ratio)
     : env_size(env_size), num_agents(num_agents), exposed_ratio(exposed_ratio){}
 
+// Create the matrix designating the lattice for the agents to move around on
 void Initial::generateMatrix(){
     matrix.assign(env_size, std::vector<Populations*>(env_size, nullptr));
 }
 
+// Place the agents in random places on the lattice
 void Initial::placeAgents(){
     // Create random number generator
     std::random_device rng;
@@ -31,6 +34,7 @@ void Initial::placeAgents(){
             // Determine agents compartment
             int compartment = (agent_count < exposed_count) ? 2 : 1;
             std::vector<int> coords  = {x, y};
+            // Create the instance of the agent in this location
             matrix[x][y] = new Populations(coords, compartment);
             occupied.insert({x, y});
             agent_count++;
@@ -38,6 +42,7 @@ void Initial::placeAgents(){
     }
 }
 
+// Getter function for env_size
 int Initial::getEnvSize(){
     return env_size;
 }

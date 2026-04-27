@@ -6,11 +6,12 @@
 #include <vector>
 
 struct Solution {
-        std::vector<double> times;
-        std::vector<Populations> states;
-    };
+    std::vector<double> times;
+    std::vector<Populations> states;
+};
 
 class Solver {
+// Don't want to accidently edit these so they are private
 private: 
     double dt;
     double t_end;
