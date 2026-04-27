@@ -2,6 +2,7 @@
 #define SIMULATION_H
 #include "initial.h"
 #include "populations.h"
+#include <vector>
 
 class Simulation {
 private:
@@ -17,6 +18,8 @@ public:
     void step();
     void updateAgent(int x, int y);
     void saveMatrix(int step_number);
+    std::vector <int> countCompartments();
+    void saveCompartmentData(const std::vector<std::vector<int>>& compartment_counts);
 };
 
 #endif

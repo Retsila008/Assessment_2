@@ -29,7 +29,7 @@ void Initial::placeAgents(){
         // If the desired location is empty
         if (occupied.find({x, y}) == occupied.end()) {
             // Determine agents compartment
-            int compartment = (agent_count < exposed_count) ? 3 : 1;
+            int compartment = (agent_count < exposed_count) ? 2 : 1;
             std::vector<int> coords  = {x, y};
             matrix[x][y] = new Populations(coords, compartment);
             occupied.insert({x, y});

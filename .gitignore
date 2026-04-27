@@ -9,3 +9,6 @@ task_1_data
 
 # Figures
 *.png
+
+# Word Doc
+*.docx

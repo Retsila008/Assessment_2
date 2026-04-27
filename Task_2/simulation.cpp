@@ -11,25 +11,74 @@ Simulation::Simulation(Initial& initial, int num_steps, double beta, double sigm
     : initial(initial), num_steps(num_steps), beta(beta), sigma(sigma), gamma(gamma){}
 
 void Simulation::run(){
+    // Vector to store compartment counts at each step
+    std::vector<std::vector<int>> compartment_counts;
+
     // Go through time and run the simulation for each step
     for(int i = 0; i < num_steps; ++i){
-        step();
+        
         // Save snapshot of matrix 
         saveMatrix(i);
+
+        // Count agents in each compartment
+        std::vector<int> counts = countCompartments();
+        compartment_counts.push_back(counts);
+        
+        // Call step function
+        step();
     }
+
+    // Save compartment data to file
+    saveCompartmentData(compartment_counts);
 }
 
 void Simulation::step(){
     // Scan through the matrix
     int env_size = initial.getEnvSize();
     for(int x = 0; x < env_size; x++){
-        for(int y = 0; y < env_size; x++){
+        for(int y = 0; y < env_size; y++){
             // Update the angent only if there is one in that position
             if(initial.matrix[x][y] != nullptr){
                 updateAgent(x, y);
             }
         }
     }
+}
+
+std::vector<int> Simulation::countCompartments(){
+    // Count agents in each compartment
+    std::vector<int> counts(5, 0);
+    
+    // Loop through entire matrix and return total counts of each compartment
+    int env_size = initial.getEnvSize();
+    for(int x = 0; x < env_size; x++){
+        for(int y = 0; y < env_size; y++){
+            if(initial.matrix[x][y] != nullptr){
+                int compartment = initial.matrix[x][y] -> compartment;
+                if(compartment >= 1 && compartment <= 4){
+                    counts[compartment]++;
+                }
+            }
+        }
+    }
+    
+    return counts;
+}
+
+void Simulation::saveCompartmentData(const std::vector<std::vector<int>>& compartment_counts){
+    // Create file
+    std::ofstream file("task_2_data.txt");
+
+    // Add contents to file
+    file << "Step,s,e,i,r\n";
+     for(int step = 0; step < compartment_counts.size(); step++){
+        file << step;
+        for(int i = 1; i < compartment_counts[step].size(); i++){
+            file << "," << compartment_counts[step][i];
+        }
+        file << "\n";
+    }
+    file.close();
 }
 
 void Simulation::saveMatrix(int step_number){
@@ -83,35 +132,42 @@ void Simulation::updateAgent(int x, int y){
     switch(direction){
         // Move up
         case 0:
-            new_y = (y + 1) % env_size;
+            new_x = (x - 1 + env_size) % env_size;
             break;
         // Move up-right
         case 1:
-            new_x = (x + 1) % env_size;
+            new_x = (x - 1 + env_size) % env_size;
             new_y = (y + 1) % env_size;
+            break;
         // Move right
         case 2:
-            new_x = (x + 1) % env_size;
+            new_y = (y + 1) % env_size;
+            break;
         // Move down-right
         case 3:
             new_x = (x + 1) % env_size;
-            new_y = (y - 1 + env_size) % env_size;
+            new_y = (y + 1) % env_size;
+            break;
         // Move down
         case 4:
-            new_y = (y - 1 + env_size) % env_size;
+            new_x = (x + 1) % env_size;
+            break;
         // Move down-left
         case 5:
-            new_x = (x - 1 + env_size) % env_size;
+            new_x = (x + 1) % env_size;
             new_y = (y - 1 + env_size) % env_size;
+            break;
         // Move left
         case 6:
-            new_x = (x - 1 + env_size) % env_size;
+            new_y = (y - 1 + env_size) % env_size;
+            break;
         // Move up-left
         case 7:
             new_x = (x - 1 + env_size) % env_size;
-            new_y = (y + 1) % env_size;
+            new_y = (y - 1 + env_size) % env_size;
+            break;
     }
-
+    
     // Ensure destination is not already occupied
     if (initial.matrix[new_x][new_y] == nullptr){
         initial.matrix[new_x][new_y] = agent;
@@ -178,7 +234,7 @@ void Simulation::updateAgent(int x, int y){
         }
         
         // If the conditions are met, infect the agent
-        if(becoming_infected = true){
+        if(becoming_infected == true){
             agent -> compartment = 2;
         }
     }
