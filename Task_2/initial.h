@@ -9,12 +9,13 @@ private:
     int env_size;
     int num_agents;
     double exposed_ratio;
+    int seed;
 
 public: 
     // This is public just so I don't have to write a getter function
     std::vector<std::vector<Populations*>> matrix;
     
-    Initial(int env_size, int num_agents, double exposed_ratio);
+    Initial(int env_size, int num_agents, double exposed_ratio, int seed);
     void generateMatrix();
     void placeAgents();
     int getEnvSize();

@@ -7,8 +7,8 @@
 #include <sstream>
 #include <cstdlib>
 
-Simulation::Simulation(Initial& initial, int num_steps, double beta, double sigma, double gamma)
-    : initial(initial), num_steps(num_steps), beta(beta), sigma(sigma), gamma(gamma){}
+Simulation::Simulation(Initial& initial, int num_steps, double beta, double sigma, double gamma, int seed)
+    : initial(initial), num_steps(num_steps), beta(beta), sigma(sigma), gamma(gamma), seed(seed){}
 
 void Simulation::run(){
     // Vector to store compartment counts at each step
@@ -113,8 +113,7 @@ void Simulation::updateAgent(int x, int y){
     // ========== STEP A ==========
  
     // Create random number generator
-    static std::random_device rng;
-    static std::mt19937 gen(rng());
+    static std::mt19937 gen(seed);
     std::uniform_int_distribution<> direction_dis(0, 7);
     std::uniform_real_distribution<> prob_dis(0.0, 1.0);
 

@@ -4,8 +4,8 @@
 #include <cmath>
 
 // Constructor for the class
-Initial::Initial(int env_size, int num_agents, double exposed_ratio)
-    : env_size(env_size), num_agents(num_agents), exposed_ratio(exposed_ratio){}
+Initial::Initial(int env_size, int num_agents, double exposed_ratio, int seed)
+    : env_size(env_size), num_agents(num_agents), exposed_ratio(exposed_ratio), seed(seed){}
 
 // Create the matrix designating the lattice for the agents to move around on
 void Initial::generateMatrix(){
@@ -15,8 +15,7 @@ void Initial::generateMatrix(){
 // Place the agents in random places on the lattice
 void Initial::placeAgents(){
     // Create random number generator
-    std::random_device rng;
-    std::mt19937 gen(rng());
+    std::mt19937 gen(seed);
     std::uniform_int_distribution<> dis(0, env_size - 1);
 
     // Calculate the required number of infected agents

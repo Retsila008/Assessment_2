@@ -11,6 +11,7 @@ int main(){
     double beta;
     double sigma;
     double gamma;
+    int seed;
     
 
     // Take input values for paramaters to ensure maintable code
@@ -28,12 +29,15 @@ int main(){
     std::cin >> sigma;
     std::cout << "Enter value for gamma: ";
     std::cin >> gamma;
+    std::cout << "Enter value for seed: ";
+    std::cin >> seed;
+
 
     // Create instances of classes
-    Initial initial(env_size, num_agents, exposed_ratio);
+    Initial initial(env_size, num_agents, exposed_ratio, seed);
     initial.generateMatrix();
     initial.placeAgents();
-    Simulation simulation(initial, num_steps, beta, sigma, gamma);
+    Simulation simulation(initial, num_steps, beta, sigma, gamma, seed);
 
     // Run the simulation
     simulation.run();

@@ -11,9 +11,10 @@ private:
     double beta;
     double sigma;
     double gamma;
+    int seed;
 
 public:
-    Simulation(Initial& initial, int num_steps, double beta, double sigma, double gamma);
+    Simulation(Initial& initial, int num_steps, double beta, double sigma, double gamma, int seed);
     void run();
     void step();
     void updateAgent(int x, int y);
